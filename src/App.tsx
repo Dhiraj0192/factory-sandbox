@@ -13,6 +13,7 @@ export function App() {
       <button onClick={() => setCount((current) => Math.max(0, current - 1))}>
         Decrement
       </button>
+      <button onClick={() => setCount((current) => current * 3)}>Triple</button>
       <button onClick={() => setCount(0)}>Reset</button>
     </main>
   );
