@@ -1,3 +1,4 @@
 checks.sh
 src/App.test.tsx
 .github/workflows/ci.yml
+.github/workflows/protected-paths.yml
