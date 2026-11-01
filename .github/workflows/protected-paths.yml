@@ -1,0 +1,33 @@
+name: protected-paths
+
+# Runs from the base branch, so a pull request cannot change this check, and it
+# never checks out or runs the pull request's code.
+on:
+  pull_request_target:
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  protected-paths:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr diff "$PR" --repo "$GITHUB_REPOSITORY" --name-only > changed.txt
+          failed=0
+          while IFS= read -r path; do
+            case "$path" in ''|'#'*) continue ;; esac
+            prefix="${path%/}/"
+            while IFS= read -r file; do
+              if [ "$file" = "$path" ] || [ "${file#"$prefix"}" != "$file" ]; then
+                echo "::error::protected path changed: $file"
+                failed=1
+              fi
+            done < changed.txt
+          done < <(cat factory/protected.txt; echo factory/protected.txt)
+          exit "$failed"
