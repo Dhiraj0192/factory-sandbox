@@ -10,6 +10,9 @@ export function App() {
       <button onClick={() => setCount((current) => current + 1)}>
         count is {count}
       </button>
+      <button onClick={() => setCount((current) => current + 2)}>
+        Plus Two
+      </button>
       <button onClick={() => setCount((current) => Math.max(0, current - 1))}>
         Decrement
       </button>
