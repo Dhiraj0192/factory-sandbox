@@ -14,6 +14,7 @@ export function App() {
         Decrement
       </button>
       <button onClick={() => setCount((current) => current * 3)}>Triple</button>
+      <button onClick={() => setCount((current) => -current)}>Negate</button>
       <button onClick={() => setCount(0)}>Reset</button>
     </main>
   );
