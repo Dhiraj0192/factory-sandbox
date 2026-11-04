@@ -17,3 +17,5 @@ npm run checks  # lint + typecheck + test + build
 ## Purpose
 
 This repo exists to prove the pipeline end to end: an issue comes in, a sandboxed worker builds it, `checks.sh` proves it, an independent reviewer inspects the evidence, and a pull request comes back to Sir. Nothing here is production software.
+
+This repository proves the Jarvis software factory.
